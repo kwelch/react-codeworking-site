@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { css, Global } from '@emotion/core';
 import Header from './header';
+import { color3, color5 } from './colors';
 
 const globalStyles = css`
   * {
@@ -18,8 +19,8 @@ const globalStyles = css`
       'Segoe UI Symbol';
   }
   body {
-    background-color: rgba(237, 239, 244, 1);
-    color: rgba(97, 114, 150, 1);
+    background-color: ${color3};
+    color: ${color5};
   }
 `;
 
