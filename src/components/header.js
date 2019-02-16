@@ -1,17 +1,19 @@
+import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { color1 } from './colors';
 
 const Header = ({ siteTitle }) => (
   <div
-    style={{
-      background: `${color1}`,
+    css={{
+      background: color1,
       marginBottom: `1.45rem`,
     }}
   >
     <div
-      style={{
+      css={{
         margin: `0 auto`,
         maxWidth: 960,
         padding: `1.45rem 1.0875rem`,
@@ -20,7 +22,7 @@ const Header = ({ siteTitle }) => (
       <h1 style={{ margin: 0 }}>
         <Link
           to="/"
-          style={{
+          css={{
             color: `white`,
             fontFamily: 'Raleway',
             fontSize: 64,
