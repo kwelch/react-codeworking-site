@@ -22,45 +22,6 @@ const Header = ({ siteTitle }) => (
           to="/"
           style={{
             color: `white`,
-            fontFamily: 'Alegreya Sans',
-            fontSize: 64,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            fontFamily: 'Montserrat Subrayada',
-            fontSize: 64,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            fontFamily: 'Permanent Marker',
-            fontSize: 64,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
             fontFamily: 'Raleway',
             fontSize: 64,
             textDecoration: `none`,
