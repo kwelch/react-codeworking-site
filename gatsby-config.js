@@ -26,14 +26,6 @@ module.exports = {
         trackingId: '',
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/pages`,
-        name: 'markdown-pages',
-      },
-    },
-    `gatsby-transformer-remark`,
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
