@@ -10,11 +10,17 @@ import {
 } from '../components/styles';
 import ExternalLink from '../components/ExternalLink';
 
+const getDirectionsLink = (address) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    address
+  )}`;
+
 function HomePage({
   data: {
     allEventbriteEvent: { edges: events },
   },
 }) {
+  console.log(events);
   return (
     <Layout>
       <div className="page-container">
@@ -43,18 +49,32 @@ function HomePage({
         </div>
         <div css={[withGutters, styleLinks({ color: darkAccent })]}>
           <h1 css={{ margin: '0.75em 0' }}>Upcoming Events</h1>
-          {events.map(({ node: event }) => (
-            <article css={{ marginBottom: '1rem' }} key={event.id}>
-              <h3>
-                <ExternalLink href={event.url}>{event.name.text}</ExternalLink>
-              </h3>
-              <p>
-                <span>{event.venue.name}</span>
-                <br />
-                {event.venue.address.localized_address_display}
-              </p>
-            </article>
-          ))}
+          {events.map(({ node: event }) => {
+            const displayAddress =
+              event.venue.address.localized_address_display;
+            return (
+              <article css={{ marginBottom: '1rem' }} key={event.id}>
+                <h3>
+                  <ExternalLink href={event.url}>
+                    {event.name.text}
+                  </ExternalLink>
+                </h3>
+                <p>
+                  <span>{event.venue.name}</span>
+                  <br />
+                  {displayAddress}
+                  <br />
+                  <ExternalLink href={event.url}>
+                    RSVP
+                  </ExternalLink>{' '}
+                  |{' '}
+                  <ExternalLink href={getDirectionsLink(displayAddress)}>
+                    Get Directions
+                  </ExternalLink>
+                </p>
+              </article>
+            );
+          })}
         </div>
         {/*
         <div css={[withGutters]}>
