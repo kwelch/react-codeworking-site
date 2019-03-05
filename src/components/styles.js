@@ -26,6 +26,7 @@ export const globalSyles = {
 
 export const withGutters = css({
   margin: `0 auto`,
+  width: `calc(100% - 30px)`,
   maxWidth: 960,
 });
 

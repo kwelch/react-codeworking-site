@@ -57,7 +57,7 @@ function HomePage({
             </div>
           ))}
         </div>
-        {/* 
+        {/*
         <div css={[withGutters]}>
           <div css={{ background: light }}>
             <h1>Why you should attend?</h1>
