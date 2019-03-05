@@ -1,0 +1,15 @@
+{
+  "name": "gatsby-source-eventbrite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gatsby-node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "keywords": [],
+  "author": "Kyle Welch <kwelch0626@gmail.com> (https://kwelch.dev/)",
+  "license": "MIT",
+  "dependencies": {
+    "eventbrite": "^1.2.1"
+  }
+}
