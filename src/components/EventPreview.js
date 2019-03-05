@@ -6,10 +6,11 @@ const getDirectionsLink = (address) =>
     address
   )}`;
 
-export default function EventPreview({ event, css }) {
+export default function EventPreview({ event, ...props }) {
   const { url, name, venue } = event;
+  const displayAddress = event.venue.address.localized_address_display;
   return (
-    <article css={css}>
+    <article {...props}>
       <h3>
         <ExternalLink href={url}>{name.text}</ExternalLink>
       </h3>
