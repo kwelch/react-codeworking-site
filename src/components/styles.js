@@ -1,5 +1,4 @@
 import { css } from '@emotion/core';
-import { underline } from 'ansi-colors';
 
 export const black = '#202020';
 export const white = '#FFFFFF';
@@ -28,4 +27,14 @@ export const globalSyles = {
 export const withGutters = css({
   margin: `0 auto`,
   maxWidth: 960,
+});
+
+export const styleLinks = ({ color = dark }) => ({
+  a: {
+    color: color,
+
+    '&:hover,&:active,&:visited': {
+      color: color,
+    },
+  },
 });

@@ -1,18 +1,7 @@
 import React from 'react';
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import {
-  black,
-  white,
-  brand,
-  lightAccent,
-  light,
-  darkAccent,
-  withGutters,
-  dark,
-} from './styles';
+import { light, withGutters, dark } from './styles';
 
 const Header = ({ siteTitle }) => (
   <div

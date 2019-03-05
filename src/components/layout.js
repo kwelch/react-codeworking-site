@@ -1,11 +1,10 @@
 import React from 'react';
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Global } from '@emotion/core';
 import Header from './header';
-import { dark, light, withGutters, globalSyles, black } from './styles';
+import { dark, light, withGutters, globalSyles } from './styles';
+import ExternalLink from './ExternalLink';
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -50,11 +49,15 @@ const Layout = ({ children }) => (
           >
             © {new Date().getFullYear()}, Built with
             {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a> | Hosted by{' '}
-            <a href="https://netlify.com">Netlify</a> | Contribute on{' '}
-            <a href="https://github.com/kwelch/react-codeworking-site">
+            <ExternalLink href="https://www.gatsbyjs.org">
+              Gatsby
+            </ExternalLink>{' '}
+            | Hosted by{' '}
+            <ExternalLink href="https://netlify.com">Netlify</ExternalLink> |
+            Contribute on{' '}
+            <ExternalLink href="https://github.com/kwelch/react-codeworking-site">
               GitHub
-            </a>
+            </ExternalLink>
           </footer>
         </div>
       </>
