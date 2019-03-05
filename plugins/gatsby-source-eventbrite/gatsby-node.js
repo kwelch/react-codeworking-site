@@ -20,7 +20,7 @@ exports.sourceNodes = function(
   const sdk = eventbrite({ token });
 
   return sdk
-    .request(`/organizers/${organizerId}/events/?only_public=on`)
+    .request(`/organizers/${organizerId}/events/?only_public=on&expand=venue`)
     .then(({ events }) => {
       events.forEach((event) => {
         const eventNode = processEvent(event);
