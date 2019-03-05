@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   siteMetadata: {
     title: `CodeWorking`,
@@ -29,8 +31,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-eventbrite',
       options: {
-        organizerId: '<ORGANIZER-ID>',
-        token: '<ACCESS-TOKEN>',
+        organizerId: '15672387101',
+        token: process.env.EVENTBRITE_ACCESS_TOKEN,
       },
     },
     // {
