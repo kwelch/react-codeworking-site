@@ -26,6 +26,13 @@ module.exports = {
         trackingId: '',
       },
     },
+    {
+      resolve: 'gatsby-source-eventbrite',
+      options: {
+        organizerId: '<ORGANIZER-ID>',
+        token: '<ACCESS-TOKEN>',
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
