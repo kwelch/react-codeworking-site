@@ -16,7 +16,9 @@ exports.sourceNodes = function(
       },
     });
   };
-
+  if (!token) {
+    throw new Error("Missing Eventbrite OAuth token");
+  }
   const sdk = eventbrite({ token });
 
   return sdk
