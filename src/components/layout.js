@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Global } from '@emotion/core';
 import Header from './header';
-import { dark, light, withGutters, globalSyles } from './styles';
+import { dark, light, withGutters, layoutWrapper, layoutMain, globalSyles } from './styles';
 import ExternalLink from './ExternalLink';
 
 const Layout = ({ children }) => (
@@ -18,10 +18,12 @@ const Layout = ({ children }) => (
       }
     `}
     render={(data) => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
+      <div css={[layoutWrapper]}>
         <Global styles={globalSyles} />
-        {children}
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <main css={[layoutMain]}>
+          {children}
+        </main>
         <div
           css={{
             backgroundColor: dark,
@@ -60,7 +62,7 @@ const Layout = ({ children }) => (
             </ExternalLink>
           </footer>
         </div>
-      </>
+      </div>
     )}
   />
 );

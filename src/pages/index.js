@@ -2,7 +2,12 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { withGutters, light, darkAccent } from '../components/styles';
+import {
+  withGutters,
+  light,
+  darkAccent,
+  styleLinks,
+} from '../components/styles';
 import ExternalLink from '../components/ExternalLink';
 
 function HomePage({
@@ -44,7 +49,7 @@ function HomePage({
         >
           Upcoming Events
         </h1>
-        <div css={[withGutters]}>
+        <div css={[withGutters, styleLinks({ color: darkAccent })]}>
           {events.map(({ node: event }) => (
             <div key={event.id}>
               <h3>
