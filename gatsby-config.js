@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `React CodeWorking`,
-    description: `React CodeWorking is a monthly co-working event for React developers in Nashville.`,
+    title: `CodeWorking`,
+    description: `CodeWorking engineering better solutions and leveling up the community.`,
     author: `@kwelch`,
   },
   plugins: [

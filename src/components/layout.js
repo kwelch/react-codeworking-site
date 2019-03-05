@@ -3,28 +3,9 @@ import React from 'react';
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
-import { css, Global } from '@emotion/core';
+import { Global } from '@emotion/core';
 import Header from './header';
-import { color3, color5 } from './colors';
-
-const globalStyles = css`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html,
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-      'Roboto Light', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-      'Helvetica Neue', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol';
-  }
-  body {
-    background-color: ${color3};
-    color: ${color5};
-  }
-`;
+import { dark, light, withGutters, globalSyles, black } from './styles';
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -40,17 +21,33 @@ const Layout = ({ children }) => (
     render={(data) => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <Global styles={globalStyles} />
+        <Global styles={globalSyles} />
+        {children}
         <div
           css={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
+            backgroundColor: dark,
+            padding: '.35rem 0',
+            marginTop: '.5rem',
+            color: light,
           }}
         >
-          {children}
-          <footer>
+          <footer
+            css={[
+              withGutters,
+              {
+                a: {
+                  color: light,
+                  textDecoration: 'none',
+                  fontStyle: 'italic',
+
+                  '&:hover,&:active,&:visited': {
+                    color: light,
+                    textDecoration: 'underline',
+                  },
+                },
+              },
+            ]}
+          >
             © {new Date().getFullYear()}, Built with
             {` `}
             <a href="https://www.gatsbyjs.org">Gatsby</a> | Hosted by{' '}

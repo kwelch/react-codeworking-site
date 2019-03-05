@@ -3,27 +3,37 @@ import React from 'react';
 import { jsx } from '@emotion/core';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { color1 } from './colors';
+import {
+  black,
+  white,
+  brand,
+  lightAccent,
+  light,
+  darkAccent,
+  withGutters,
+  dark,
+} from './styles';
 
 const Header = ({ siteTitle }) => (
   <div
     css={{
-      background: color1,
+      background: dark,
       marginBottom: `1.45rem`,
     }}
   >
     <div
-      css={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
+      css={[
+        withGutters,
+        {
+          padding: `1.45rem 0`,
+        },
+      ]}
     >
       <h1 style={{ margin: 0 }}>
         <Link
           to="/"
           css={{
-            color: `white`,
+            color: light,
             fontFamily: 'Raleway',
             fontSize: 64,
             textDecoration: `none`,
