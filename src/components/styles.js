@@ -55,3 +55,14 @@ export const styleLinks = ({ color = dark }) => ({
     },
   },
 });
+
+export const breakpoints = {
+  medium: 640,
+  large: 1024,
+  xlarge: 1260,
+};
+
+export const mq = (bp) =>
+  breakpoints.hasOwnProperty(bp)
+    ? `@media (min-width: ${breakpoints[bp]}px)`
+    : '&';

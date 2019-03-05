@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { light, withGutters, dark } from './styles';
+import { light, withGutters, dark, mq } from './styles';
 
 const Header = ({ siteTitle }) => (
-  <div
+  <header
     css={{
       background: dark,
       marginBottom: `1.45rem`,
@@ -24,15 +24,18 @@ const Header = ({ siteTitle }) => (
           css={{
             color: light,
             fontFamily: 'Raleway',
-            fontSize: 64,
+            fontSize: 32,
             textDecoration: `none`,
+            [mq('medium')]: {
+              fontSize: 64,
+            },
           }}
         >
           {siteTitle}
         </Link>
       </h1>
     </div>
-  </div>
+  </header>
 );
 
 Header.propTypes = {

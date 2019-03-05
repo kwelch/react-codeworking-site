@@ -41,25 +41,19 @@ function HomePage({
             </h2>
           </div>
         </div>
-        <h1
-          css={{
-            textAlign: 'center',
-            paddingBottom: '0.2rem',
-          }}
-        >
-          Upcoming Events
-        </h1>
         <div css={[withGutters, styleLinks({ color: darkAccent })]}>
+          <h1 css={{ margin: '0.75em 0' }}>Upcoming Events</h1>
           {events.map(({ node: event }) => (
-            <div key={event.id}>
+            <article css={{ marginBottom: '1rem' }} key={event.id}>
               <h3>
                 <ExternalLink href={event.url}>{event.name.text}</ExternalLink>
               </h3>
               <p>
-                <span>{event.venue.name}</span> -{' '}
+                <span>{event.venue.name}</span>
+                <br />
                 {event.venue.address.localized_address_display}
               </p>
-            </div>
+            </article>
           ))}
         </div>
         {/*
