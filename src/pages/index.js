@@ -2,8 +2,13 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { withGutters, light, darkAccent } from '../components/styles';
-import ExternalLink from '../components/ExternalLink';
+import {
+  withGutters,
+  light,
+  darkAccent,
+  styleLinks,
+} from '../components/styles';
+import EventPreview from '../components/EventPreview';
 
 function HomePage({
   data: {
@@ -36,28 +41,17 @@ function HomePage({
             </h2>
           </div>
         </div>
-        <h1
-          css={{
-            textAlign: 'center',
-            paddingBottom: '0.2rem',
-          }}
-        >
-          Upcoming Events
-        </h1>
-        <div css={[withGutters]}>
+        <div css={[withGutters, styleLinks({ color: darkAccent })]}>
+          <h1 css={{ margin: '0.75em 0' }}>Upcoming Events</h1>
           {events.map(({ node: event }) => (
-            <div key={event.id}>
-              <h3>
-                <ExternalLink href={event.url}>{event.name.text}</ExternalLink>
-              </h3>
-              <p>
-                <span>{event.venue.name}</span> -{' '}
-                {event.venue.address.localized_address_display}
-              </p>
-            </div>
+            <EventPreview
+              key={event.id}
+              event={event}
+              css={{ marginBottom: '1rem' }}
+            />
           ))}
         </div>
-        {/* 
+        {/*
         <div css={[withGutters]}>
           <div css={{ background: light }}>
             <h1>Why you should attend?</h1>
