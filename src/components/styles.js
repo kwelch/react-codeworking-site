@@ -30,23 +30,14 @@ export const globalSyles = {
   },
 };
 
-export const thumbnail = css({
-  float: 'left',
-  width: '100px',
-  margin: '3px',
-});
-
 export const footerLinks = css({
   marginLeft: '105px',
 });
 
-export const loader = css({
-  filter: 'blur(25px)',
-  width: '71%'
-});
-
-export const loaderContainer = css({
-  overflow: 'hidden'
+export const thumbnail = css({
+  float: 'left',
+  width: '100px',
+  margin: '3px',
 });
 
 export const layoutWrapper = css({

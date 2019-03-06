@@ -1,5 +1,6 @@
 import React from 'react';
-import { loader, loaderContainer, thumbnail } from "./styles";
+import { css } from '@emotion/core';
+import { thumbnail } from "./styles";
 
 export default function Loader() {
   return (
@@ -12,3 +13,12 @@ export default function Loader() {
     </div>
   );
 }
+
+export const loader = css({
+  filter: 'blur(25px)',
+  width: '71%'
+});
+
+export const loaderContainer = css({
+  overflow: 'hidden'
+});
