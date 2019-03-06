@@ -1,8 +1,9 @@
+const queryString = require('query-string');
 const eventbrite = require('eventbrite').default;
 
 exports.sourceNodes = async function(
   { actions: { createNode }, createNodeId, createContentDigest },
-  { organizerId, token, verbose = true }
+  { query, token, verbose = true }
 ) {
   const processEvent = (event) => {
     return {
@@ -18,12 +19,12 @@ exports.sourceNodes = async function(
     };
   };
   if (!token) {
-    throw new Error("Missing Eventbrite OAuth token");
+    throw new Error('Missing Eventbrite OAuth token');
   }
   const sdk = eventbrite({ token });
   try {
     const { events } = await sdk.request(
-      `/organizers/${organizerId}/events/?only_public=on&expand=venue`
+      `/events/search/?${queryString.stringify(query)}`
     );
 
     events

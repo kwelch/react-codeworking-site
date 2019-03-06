@@ -31,7 +31,10 @@ module.exports = {
     {
       resolve: 'gatsby-source-eventbrite',
       options: {
-        organizerId: '15672387101',
+        query: {
+          'organizer.id': '15672387101',
+          expand: ['venue'],
+        },
         token: process.env.EVENTBRITE_ACCESS_TOKEN,
       },
     },

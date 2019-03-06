@@ -10,6 +10,7 @@
   "author": "Kyle Welch <kwelch0626@gmail.com> (https://kwelch.dev/)",
   "license": "MIT",
   "dependencies": {
-    "eventbrite": "^1.2.1"
+    "eventbrite": "^1.2.1",
+    "query-string": "^6.3.0"
   }
 }
