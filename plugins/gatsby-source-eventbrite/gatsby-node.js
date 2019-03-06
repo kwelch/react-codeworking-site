@@ -26,11 +26,9 @@ exports.sourceNodes = async function(
       `/organizers/${organizerId}/events/?only_public=on&expand=venue`
     );
 
-    events.forEach((event) => {
-      const eventNode = processEvent(event);
-
-      createNode(eventNode);
-    });
+    events
+      .map((event) => processEvent(event))
+      .forEach((event) => createNode(event));
   } catch (err) {
     console.error('EB Fetch fail:', err);
   }

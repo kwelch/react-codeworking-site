@@ -30,6 +30,16 @@ export const globalSyles = {
   },
 };
 
+export const footerLinks = css({
+  marginLeft: '105px',
+});
+
+export const thumbnail = css({
+  float: 'left',
+  width: '100px',
+  margin: '3px',
+});
+
 export const layoutWrapper = css({
   height: '100%',
   display: 'flex',

@@ -96,6 +96,9 @@ export const query = graphql`
             text
           }
           url
+          logo {
+            url
+          }
           venue {
             name
             address {
