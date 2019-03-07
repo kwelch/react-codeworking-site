@@ -2,6 +2,8 @@
 
 A Gatsby plugin to asynchronously load events from the [Eventbrite Event Search API](https://www.eventbrite.com/platform/api#/reference/event-search/list/search-events).
 
+> Note: this will only load 50 events, this is to avoid thrashing the servers and eagerly loading.
+
 ## Installation
 
 With npm:
