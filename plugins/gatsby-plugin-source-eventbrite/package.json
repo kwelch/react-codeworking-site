@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-source-eventbrite",
+  "name": "gatsby-plugin-source-eventbrite",
   "version": "1.0.0",
   "description": "",
   "main": "gatsby-node.js",
