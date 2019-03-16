@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import moment from 'moment-timezone';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import {
   withGutters,
