@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import moment from 'moment-timezone';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import {
@@ -9,12 +10,20 @@ import {
   styleLinks,
 } from '../components/styles';
 import EventPreview from '../components/EventPreview';
+import formatEvents from '../lib/formatEvents';
+
+// for dev purposes only
+import dummyEvents from '../lib/dummyEvents';
 
 function HomePage({
   data: {
     allEventbriteEvent: { edges: events },
   },
 }) {
+  if (process.env.NODE_ENV === 'development') {
+    events = [...events, ...dummyEvents];
+  }
+  const eventsByDate = formatEvents(events);
   return (
     <Layout>
       <div className="page-container">
@@ -43,13 +52,23 @@ function HomePage({
         </div>
         <div css={[withGutters, styleLinks({ color: darkAccent })]}>
           <h1 css={{ margin: '0.75em 0' }}>Upcoming Events</h1>
-          {events.map(({ node: event }) => (
-            <EventPreview
-              key={event.id}
-              event={event}
-              css={{ marginBottom: '1rem' }}
-            />
-          ))}
+          <ul>
+            {eventsByDate.map(({ day, events: _events }) => (
+              <li key={day}>
+                <span>{moment(day).format('LL')}</span>
+                <ul>
+                  {_events.map(({ node: event }) => (
+                    <li key={event.id}>
+                      <EventPreview
+                        event={event}
+                        css={{ marginBottom: '1rem' }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
         </div>
         {/*
         <div css={[withGutters]}>
@@ -98,6 +117,14 @@ export const query = graphql`
           url
           logo {
             url
+          }
+          start {
+            timezone
+            utc
+          }
+          end {
+            timezone
+            utc
           }
           venue {
             name
