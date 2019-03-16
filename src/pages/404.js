@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/SEO';
-import { withGutters } from '../components/styles';
+import { withGutters } from '../lib/styles';
 
 export default function NotFoundPage() {
   return (

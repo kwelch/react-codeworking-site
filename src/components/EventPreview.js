@@ -1,6 +1,6 @@
 import React from 'react';
 import ExternalLink from '../components/ExternalLink';
-import { thumbnail, footerLinks } from './styles';
+import { thumbnail, footerLinks } from '../lib/styles';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';

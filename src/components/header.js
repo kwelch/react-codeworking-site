@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { light, withGutters, dark, mq } from './styles';
+import { light, withGutters, dark, mq } from '../lib/styles';
 
 const Header = ({ siteTitle }) => (
   <header

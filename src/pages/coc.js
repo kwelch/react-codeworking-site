@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../components/layout';
 import SEO from '../components/SEO';
-import { withGutters, darkAccent, styleLinks } from '../components/styles';
+import { withGutters, darkAccent, styleLinks } from '../lib/styles';
 
 export default function HomePage(props) {
   return (

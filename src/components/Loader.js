@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { thumbnail } from "./styles";
+import { thumbnail } from "../lib/styles";
 
 export default function Loader() {
   return (

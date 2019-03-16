@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Global } from '@emotion/core';
 import Header from './header';
-import { dark, light, withGutters, layoutWrapper, layoutMain, globalSyles } from './styles';
+import { dark, light, withGutters, layoutWrapper, layoutMain, globalSyles } from '../lib/styles';
 import ExternalLink from './ExternalLink';
 
 const Layout = ({ children }) => (

@@ -8,7 +8,7 @@ import {
   light,
   darkAccent,
   styleLinks,
-} from '../components/styles';
+} from '../lib/styles';
 import EventPreview from '../components/EventPreview';
 import formatEvents from '../lib/formatEvents';
 
