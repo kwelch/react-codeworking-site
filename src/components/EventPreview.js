@@ -1,9 +1,10 @@
 import React from 'react';
-import ExternalLink from '../components/ExternalLink';
-import { thumbnail, footerLinks } from '../lib/styles';
-import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
+import { get } from 'lodash';
+import { css } from '@emotion/core';
+import { mq, colors, defaultTransition } from '../lib/styles';
+import ExternalLink from './ExternalLink';
 import ImageLoader from './ImageLoader';
 
 /**
@@ -13,16 +14,95 @@ import ImageLoader from './ImageLoader';
  * @property {string} timezone - Time zone
  */
 
+export const styles = {
+  wrapper: css({
+    display: 'flex',
+    backgroundColor: '#fff',
+  }),
+  content: css({
+    flex: '1 1 auto',
+    padding: 10,
+    [mq('medium')]: {
+      padding: 20,
+    },
+  }),
+  figure: css({
+    flex: '0 0 100px',
+  }),
+  thumbnail: css({
+    width: '100%',
+    height: '100%',
+    minHeight: '100px',
+    objectFit: 'cover',
+    objectPosition: 'center',
+  }),
+  title: css({
+    margin: '0 0 0.125em',
+  }),
+  titleLink: css({
+    textDecoration: 'none',
+    '&:hover,&:focus': {
+      textDecoration: 'underline',
+    }
+  }),
+  time: css({
+    display: 'block',
+    marginBottom: '0.5rem',
+    color: colors.grays.mid,
+    fontSize: 14,
+    [mq('medium')]: {
+      fontSize: 16,
+    },
+  }),
+  address: css({
+    fontStyle: 'normal',
+    fontSize: 14,
+    margin: 0,
+    color: colors.grays.mid,
+    [mq('medium')]: {
+      fontSize: 16,
+    },
+    '& p': {
+      margin: 0,
+    },
+  }),
+  footerLink: css({
+    display: 'inline-block',
+    marginRight: '0.5em',
+    padding: '0.25em 0.5em',
+    borderRadius: 2,
+    transition: defaultTransition(),
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    fontSize: 12,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    lineHeight: 1,
+    border: `1px solid ${colors.grays.light}`,
+    '&,&:visited,&:active,&:focus': {
+      color: colors.grays.mid,
+    },
+    '&:hover': {
+      backgroundColor: colors.dark,
+      borderColor: colors.dark,
+      color: colors.white,
+    },
+  }),
+  footerLinks: css({
+    marginTop: 10,
+  }),
+};
+
 function EventLocation({ venue }) {
   return (
-    <address>
+    <address css={styles.address}>
       <p>{venue.name}</p>
-      <p>{venue.displayAddress}</p>
+      {/* <p>{venue.displayAddress}</p> */}
     </address>
   );
 }
 
-function EventPreview({ event, ...props }) {
+function EventPreview({ event, css: passedCss, ...props }) {
   /**
    * Format the time string from a given start and end time object
    * @param {Time} start
@@ -57,25 +137,31 @@ function EventPreview({ event, ...props }) {
   const timeString = getTimeString(start, end);
 
   return (
-    <article {...props}>
-      {logoSrc && <ImageLoader src={logoSrc} alt="logo" css={thumbnail} />}
-      <header>
-        <h3>
-          <ExternalLink href={url}>{name.text}</ExternalLink>
-        </h3>
-        {timeString && <span>{timeString}</span>}
-        {displayAddress && (
-          <EventLocation venue={{ ...venue, displayAddress }} />
+    <article css={[passedCss, styles.wrapper]} {...props}>
+      <figure css={styles.figure}>
+        {logoSrc && (
+          <ImageLoader src={logoSrc} alt="Event logo" css={styles.thumbnail} />
         )}
-      </header>
-      <footer css={footerLinks}>
-        <ExternalLink href={url}>RSVP</ExternalLink>
-        {displayAddress && (
-          <ExternalLink href={getDirectionsLink(displayAddress)}>
-            Get Directions
-          </ExternalLink>
-        )}
-      </footer>
+      </figure>
+      <div css={styles.content}>
+        <header>
+          <h3 css={styles.title}>
+            <ExternalLink css={styles.titleLink} href={url}>{name.text}</ExternalLink>
+          </h3>
+          {timeString && <span css={styles.time}>{timeString}</span>}
+          {displayAddress && (
+            <EventLocation venue={{ ...venue, displayAddress }} />
+          )}
+        </header>
+        <footer css={styles.footerLinks}>
+          <ExternalLink css={styles.footerLink} href={url}>RSVP</ExternalLink>
+          {displayAddress && (
+            <ExternalLink css={styles.footerLink} href={getDirectionsLink(displayAddress)}>
+              Directions
+            </ExternalLink>
+          )}
+        </footer>
+      </div>
     </article>
   );
 }

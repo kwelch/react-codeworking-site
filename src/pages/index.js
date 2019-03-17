@@ -1,15 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import moment from 'moment-timezone';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import {
-  withGutters,
-  light,
-  darkAccent,
-  styleLinks,
-} from '../lib/styles';
-import EventPreview from '../components/EventPreview';
+import { withGutters, light, darkAccent, styleLinks } from '../lib/styles';
+import EventsList from '../components/EventsList';
 import formatEvents from '../lib/formatEvents';
 
 // for dev purposes only
@@ -50,25 +44,9 @@ function HomePage({
             </h2>
           </div>
         </div>
-        <div css={[withGutters, styleLinks({ color: darkAccent })]}>
+        <div css={[withGutters]}>
           <h1 css={{ margin: '0.75em 0' }}>Upcoming Events</h1>
-          <ul>
-            {eventsByDate.map(({ day, events: _events }) => (
-              <li key={day}>
-                <span>{moment(day).format('LL')}</span>
-                <ul>
-                  {_events.map(({ node: event }) => (
-                    <li key={event.id}>
-                      <EventPreview
-                        event={event}
-                        css={{ marginBottom: '1rem' }}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
+          <EventsList eventGroups={eventsByDate} />
         </div>
         {/*
         <div css={[withGutters]}>
