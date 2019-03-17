@@ -2,51 +2,46 @@ import { css } from '@emotion/core';
 import { darken, lighten, rgba } from 'polished';
 
 // Colors
-export const black = '#202020';
-export const white = '#FFFFFF';
-export const light = '#FAFAF9';
-export const lightAccent = '#AE8E7B';
-export const brand = '#82AEBE';
-export const dark = '#2F3F55';
-export const darkAccent = '#537183';
 export const gray = '#8A9093';
-export const grays = {
-  xlight: lighten(0.35, gray),
-  light: lighten(0.2, gray),
-  mid: gray,
-  dark: darken(0.2, gray),
-  xdark: darken(0.35, gray),
-};
 export const colors = {
-  black,
-  white,
-  brand,
-  light,
-  lightAccent,
-  dark,
-  darkAccent,
-  grays,
+  black: '#202020',
+  white: '#FFFFFF',
+  brand: '#82AEBE',
+  light: '#FAFAF9',
+  lightAccent: '#AE8E7B',
+  dark: '#2F3F55',
+  darkAccent: '#537183',
+  grays: {
+    xlight: lighten(0.35, gray),
+    light: lighten(0.2, gray),
+    mid: gray,
+    dark: darken(0.2, gray),
+    xdark: darken(0.35, gray),
+  },
 };
 
-export const defaultTransition = (prop = 'all') => `${prop} 130ms ease-in`;
+// Fonts
+export const fontFamilies = {
+  primary: `'Roboto', 'Roboto Light', 'Fira Sans', 'Droid Sans', sans-serif`,
+  secondary: `'Raleway', helvetica, arial, sans-serif`,
+};
 
 // Shadows
-export const shadow = `0 0 20px -10px ${rgba(black, 0.375)}`;
-export const shadowFocus = `0 0 20px -10px ${rgba(black, 0.5)}`;
+export const shadows = {
+  boxShadow: `0 0 20px -10px ${rgba(colors.black, 0.375)}`,
+  boxShadowFocus: `0 0 20px -10px ${rgba(colors.black, 0.5)}`,
+};
 
 // Media query breakpoints
-export const breakpoints = {
+export const breakpoints = (bps = {}) => ({
   medium: 640,
   large: 1024,
   xlarge: 1260,
-};
-export const mq = (bp) =>
-  breakpoints.hasOwnProperty(bp)
-    ? `@media (min-width: ${breakpoints[bp]}px)`
-    : '&';
+  ...bps,
+});
 
 // Global styles
-export const globalSyles = {
+export const globalStyles = {
   '*': {
     margin: 0,
     padding: 0,
@@ -54,15 +49,15 @@ export const globalSyles = {
   },
   'html,body': {
     height: '100%',
-    fontFamily: `'Roboto', 'Roboto Light', 'Fira Sans', 'Droid Sans', sans-serif`,
+    fontFamily: fontFamilies.primary,
   },
   // Gatsby's wrapper elements need a declared height for flex containers to work properly
   '#___gatsby,#___gatsby>[role="group"]': {
     height: '100%',
   },
   body: {
-    color: dark,
-    backgroundColor: light,
+    color: colors.dark,
+    backgroundColor: colors.light,
   },
   p: {
     marginBlockStart: '1em',
@@ -75,24 +70,18 @@ export const globalSyles = {
     WebkitMarginEnd: 0,
   },
   a: {
-    color: dark,
-
-    '&:hover,&:active,&:visited': {
-      color: darken('0.2', dark),
+    color: colors.dark,
+    '&:hover,&:focus': {
+      color: darken('0.2', colors.dark),
     },
   },
 };
 
-// @todo: move to components
-export const layoutWrapper = css({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-});
-
-export const layoutMain = css({
-  flexGrow: 1,
-});
+// Mixins + functions
+export const mq = (bp) => {
+  const bps = breakpoints();
+  return bps.hasOwnProperty(bp) ? `@media (min-width: ${bps[bp]}px)` : '&';
+};
 
 export const withGutters = css({
   margin: `0 auto`,
@@ -100,12 +89,20 @@ export const withGutters = css({
   maxWidth: 960,
 });
 
-export const styleLinks = ({ color = dark }) => ({
-  a: {
-    color: color,
+export const defaultTransition = (prop = 'all') => `${prop} 130ms ease-in`;
 
-    '&:hover,&:active,&:visited': {
+export const styleLinks = ({ color = colors.dark }) => ({
+  a: {
+    color,
+    '&:hover,&:focus': {
       color: darken('0.2', color),
     },
   },
 });
+
+export const theme = {
+  globalStyles,
+  colors,
+  fontFamilies,
+  shadows,
+};

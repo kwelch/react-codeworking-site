@@ -2,136 +2,206 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import { get } from 'lodash';
-import { css } from '@emotion/core';
-import { mq, colors, defaultTransition } from '../lib/styles';
+import { withTheme } from 'emotion-theming';
 import ExternalLink from './ExternalLink';
 import ImageLoader from './ImageLoader';
+import { mq, defaultTransition } from '../lib/styles';
 
 /**
  * Time object type definition.
  * @typedef {Object} Time
  * @property {string} utc - UTC formatted time string.
- * @property {string} timezone - Time zone
+ * @property {string} timezone - Timezone.
  */
 
-export const styles = {
-  wrapper: css({
-    display: 'flex',
-    backgroundColor: '#fff',
-  }),
-  content: css({
-    flex: '1 1 auto',
-    padding: 10,
-    [mq('medium')]: {
-      padding: 20,
-    },
-  }),
-  figure: css({
-    flex: '0 0 100px',
-  }),
-  thumbnail: css({
-    width: '100%',
-    height: '100%',
-    minHeight: '100px',
-    objectFit: 'cover',
-    objectPosition: 'center',
-  }),
-  title: css({
-    margin: '0 0 0.125em',
-  }),
-  titleLink: css({
-    textDecoration: 'none',
-    '&:hover,&:focus': {
-      textDecoration: 'underline',
-    },
-  }),
-  time: css({
-    display: 'block',
-    marginBottom: '0.5rem',
-    color: colors.grays.mid,
-    fontSize: 14,
-    [mq('medium')]: {
-      fontSize: 16,
-    },
-  }),
-  address: css({
-    fontStyle: 'normal',
-    fontSize: 14,
-    margin: 0,
-    color: colors.grays.mid,
-    [mq('medium')]: {
-      fontSize: 16,
-    },
-    '& p': {
-      margin: 0,
-    },
-  }),
-  footerLink: css({
-    display: 'inline-block',
-    marginRight: '0.5em',
-    padding: '0.25em 0.5em',
-    borderRadius: 2,
-    transition: defaultTransition(),
-    textDecoration: 'none',
-    textTransform: 'uppercase',
-    fontSize: 12,
-    fontWeight: 'bold',
-    letterSpacing: 1,
-    lineHeight: 1,
-    border: `1px solid ${colors.grays.light}`,
-    '&,&:visited,&:active,&:focus': {
-      color: colors.grays.mid,
-    },
-    '&:hover': {
-      backgroundColor: colors.dark,
-      borderColor: colors.dark,
-      color: colors.white,
-    },
-  }),
-  footerLinks: css({
-    marginTop: 10,
-  }),
-};
+/**
+ * Format the time string from a given start and end time object
+ * @param {Time} start
+ * @param {Time} end
+ * @returns {string} Formatted time string (ex: 10:00 AM to 4:00 PM)
+ */
+function getTimeString(start, end) {
+  const formatTime = (time) =>
+    time.utc
+      ? moment(time.utc)
+          .tz((time.timezone || 'America/Chicago').replace(' ', '_'))
+          .format('h:mm A')
+      : '';
+  const startTime = formatTime(start);
+  const endTime = formatTime(end);
+  return endTime ? `${startTime} to ${endTime}` : startTime;
+}
 
-function EventLocation({ venue }) {
+/**
+ * Get a Google Maps directions URL.
+ * @param {string} address - Decoded address string.
+ * @returns {string} Google Maps URL.
+ */
+const getDirectionsLink = (address) =>
+  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+    address
+  )}`;
+
+/**
+ *
+ *
+ * @param {Object} { venue, theme }
+ * @returns
+ */
+function EventLocation({ venue, theme }) {
   return (
-    <address css={styles.address}>
+    <address
+      css={{
+        fontStyle: 'normal',
+        fontSize: 14,
+        margin: 0,
+        color: theme.colors.grays.mid,
+        [mq('medium')]: {
+          fontSize: 16,
+        },
+        '& p': {
+          margin: 0,
+        },
+      }}
+    >
       <p>{venue.name}</p>
       {/* <p>{venue.displayAddress}</p> */}
     </address>
   );
 }
 
-function EventPreview({ event, css: passedCss, ...props }) {
-  /**
-   * Format the time string from a given start and end time object
-   * @param {Time} start
-   * @param {Time} end
-   * @returns {string} Formatted time string (ex: 10:00 AM to 4:00 PM)
-   */
-  function getTimeString(start, end) {
-    const formatTime = (time) =>
-      time.utc
-        ? moment(time.utc)
-            .tz((time.timezone || 'America/Chicago').replace(' ', '_'))
-            .format('h:mm A')
-        : '';
-    const startTime = formatTime(start);
-    const endTime = formatTime(end);
-    return endTime ? `${startTime} to ${endTime}` : startTime;
-  }
+/**
+ * @file SortableTable is a React Component wrapper around {@link https://react-table.js.org} ReactTable.
+ * Anything functionality from ReactTable should be available in SortableTable out of the box, but may require styling.
+ * For more, see {@link https://react-table.js.org/#/story/readme ReactTable docs}
+ *
+ * @module SortableTable
+ * @extends Component
+ */
+function EventHeader({
+  theme,
+  eventName,
+  eventTime,
+  url,
+  displayAddress,
+  venue,
+}) {
+  const styles = {
+    title: {
+      margin: '0 0 0.125em',
+    },
+    titleLink: {
+      textDecoration: 'none',
+      '&:hover,&:focus': {
+        textDecoration: 'underline',
+      },
+    },
+    time: {
+      display: 'block',
+      marginBottom: '0.5rem',
+      color: theme.colors.grays.mid,
+      fontSize: 14,
+      [mq('medium')]: {
+        fontSize: 16,
+      },
+    },
+  };
+  return (
+    <header>
+      <h3 css={styles.title}>
+        <ExternalLink css={styles.titleLink} href={url}>
+          {eventName}
+        </ExternalLink>
+      </h3>
+      {eventTime && <span css={styles.time}>{eventTime}</span>}
+      {displayAddress && (
+        <EventLocation theme={theme} venue={{ ...venue, displayAddress }} />
+      )}
+    </header>
+  );
+}
 
-  /**
-   * Get a Google Maps directions URL.
-   * @param {string} address - Decoded address string.
-   * @returns {string} Google Maps URL.
-   */
-  const getDirectionsLink = (address) =>
-    `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-      address
-    )}`;
+function EventFooter({ theme, displayAddress, directionsUrl, url }) {
+  const styles = {
+    footerLink: {
+      display: 'inline-block',
+      marginRight: '0.5em',
+      padding: '0.25em 0.5em',
+      borderRadius: 2,
+      transition: defaultTransition(),
+      textDecoration: 'none',
+      textTransform: 'uppercase',
+      fontSize: 12,
+      fontWeight: 'bold',
+      letterSpacing: 1,
+      lineHeight: 1,
+      border: `1px solid ${theme.colors.grays.light}`,
+      '&,&:visited,&:active,&:focus': {
+        color: theme.colors.grays.mid,
+      },
+      '&:hover': {
+        backgroundColor: theme.colors.dark,
+        borderColor: theme.colors.dark,
+        color: theme.colors.white,
+      },
+    },
+    footerLinks: {
+      marginTop: 10,
+    },
+  };
 
-  const { url, name, venue, logo, start, end } = event;
+  return (
+    <footer css={styles.footerLinks}>
+      <ExternalLink css={styles.footerLink} href={url}>
+        RSVP
+      </ExternalLink>
+      {displayAddress && (
+        <ExternalLink css={styles.footerLink} href={directionsUrl}>
+          Directions
+        </ExternalLink>
+      )}
+    </footer>
+  );
+}
+
+function EventThumbnail({ logoSrc }) {
+  return (
+    <figure css={{ flex: '0 0 100px' }}>
+      <ImageLoader
+        src={logoSrc}
+        alt="Event logo"
+        css={{
+          width: '100%',
+          height: '100%',
+          minHeight: '100px',
+          objectFit: 'cover',
+          objectPosition: 'center',
+        }}
+      />
+    </figure>
+  );
+}
+
+function EventPreview({
+  event: { url, name, venue, logo, start, end },
+  css: passedCss,
+  theme,
+  ...props
+}) {
+  const styles = {
+    wrapper: {
+      display: 'flex',
+      backgroundColor: '#fff',
+    },
+    content: {
+      flex: '1 1 auto',
+      padding: 10,
+      [mq('medium')]: {
+        padding: 20,
+      },
+    },
+  };
+
   const displayAddress = get(venue, 'address.localized_address_display');
   const logoSrc = get(logo, 'url');
   const timeString = getTimeString(start, end);
@@ -139,36 +209,22 @@ function EventPreview({ event, css: passedCss, ...props }) {
   return (
     <article css={[passedCss, styles.wrapper]} {...props}>
       <div css={styles.content}>
-        <header>
-          <h3 css={styles.title}>
-            <ExternalLink css={styles.titleLink} href={url}>
-              {name.text}
-            </ExternalLink>
-          </h3>
-          {timeString && <span css={styles.time}>{timeString}</span>}
-          {displayAddress && (
-            <EventLocation venue={{ ...venue, displayAddress }} />
-          )}
-        </header>
-        <footer css={styles.footerLinks}>
-          <ExternalLink css={styles.footerLink} href={url}>
-            RSVP
-          </ExternalLink>
-          {displayAddress && (
-            <ExternalLink
-              css={styles.footerLink}
-              href={getDirectionsLink(displayAddress)}
-            >
-              Directions
-            </ExternalLink>
-          )}
-        </footer>
+        <EventHeader
+          displayAddress={displayAddress}
+          eventName={name.text}
+          eventTime={timeString}
+          theme={theme}
+          url={url}
+          venue={venue}
+        />
+        <EventFooter
+          directionsUrl={getDirectionsLink(displayAddress)}
+          displayAddress={displayAddress}
+          theme={theme}
+          url={url}
+        />
       </div>
-      <figure css={styles.figure}>
-        {logoSrc && (
-          <ImageLoader src={logoSrc} alt="Event logo" css={styles.thumbnail} />
-        )}
-      </figure>
+      {logoSrc && <EventThumbnail logoSrc={logoSrc} />}
     </article>
   );
 }
@@ -199,4 +255,4 @@ EventPreview.propTypes = {
   }).isRequired,
 };
 
-export default EventPreview;
+export default withTheme(EventPreview);

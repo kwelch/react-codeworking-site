@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { withGutters, darkAccent, styleLinks } from '../lib/styles';
+import { colors, withGutters, styleLinks } from '../lib/styles';
 
 export default function HomePage(props) {
   return (
@@ -10,7 +10,7 @@ export default function HomePage(props) {
         <SEO title="Code of Conduct" />
         <div css={[withGutters, { marginBottom: '2rem' }]}>
           <h1 css={{ marginBottom: '1rem' }}>Code of conduct</h1>
-          <p css={[styleLinks({ color: darkAccent })]}>
+          <p css={[styleLinks({ color: colors.darkAccent })]}>
             React CodeWorking follows the{' '}
             <a href="http://confcodeofconduct.com/">
               conference code of conduct

@@ -2,70 +2,46 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Global } from '@emotion/core';
+import { ThemeProvider } from 'emotion-theming';
 import Header from './Header';
-import { dark, light, withGutters, layoutWrapper, layoutMain, globalSyles } from '../lib/styles';
-import ExternalLink from './ExternalLink';
+import Footer from './Footer';
+import { theme } from '../lib/styles';
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+const Layout = ({ children }) => {
+  const styles = {
+    layoutWrapper: {
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    layoutMain: {
+      flexGrow: 1,
+    },
+  };
+  return (
+    <StaticQuery
+      query={graphql`
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
-    render={(data) => (
-      <div css={[layoutWrapper]}>
-        <Global styles={globalSyles} />
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <main css={[layoutMain]}>
-          {children}
-        </main>
-        <div
-          css={{
-            backgroundColor: dark,
-            padding: '.35rem 0',
-            marginTop: '.5rem',
-            color: light,
-          }}
-        >
-          <footer
-            css={[
-              withGutters,
-              {
-                a: {
-                  color: light,
-                  textDecoration: 'none',
-                  fontStyle: 'italic',
-
-                  '&:hover,&:active,&:visited': {
-                    color: light,
-                    textDecoration: 'underline',
-                  },
-                },
-              },
-            ]}
-          >
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <ExternalLink href="https://www.gatsbyjs.org">
-              Gatsby
-            </ExternalLink>{' '}
-            | Hosted by{' '}
-            <ExternalLink href="https://netlify.com">Netlify</ExternalLink> |
-            Contribute on{' '}
-            <ExternalLink href="https://github.com/kwelch/react-codeworking-site">
-              GitHub
-            </ExternalLink>
-          </footer>
-        </div>
-      </div>
-    )}
-  />
-);
+      `}
+      render={(data) => (
+        <ThemeProvider theme={theme}>
+          <Global styles={(theme) => theme.globalStyles} />
+          <div css={styles.layoutWrapper}>
+            <Header siteTitle={data.site.siteMetadata.title} />
+            <main css={styles.layoutMain}>{children}</main>
+            <Footer />
+          </div>
+        </ThemeProvider>
+      )}
+    />
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import { withGutters, light, darkAccent, styleLinks } from '../lib/styles';
+import { colors, withGutters } from '../lib/styles';
 import EventsList from '../components/EventsList';
 import formatEvents from '../lib/formatEvents';
 
@@ -24,14 +24,14 @@ function HomePage({
         <SEO title="Home" />
         <div
           css={{
-            backgroundColor: darkAccent,
+            backgroundColor: colors.darkAccent,
           }}
         >
           <div
             css={[
               withGutters,
               {
-                color: light,
+                color: colors.light,
                 padding: '1.28rem 0',
                 marginBottom: '1.2rem',
                 marginTop: '-1.5rem',
@@ -50,12 +50,12 @@ function HomePage({
         </div>
         {/*
         <div css={[withGutters]}>
-          <div css={{ background: light }}>
+          <div css={{ background: colors.light }}>
             <h1>Why you should attend?</h1>
           </div>
         </div>
         <div css={[withGutters]}>
-          <div css={{ background: light }}>
+          <div css={{ background: colors.light }}>
             <h1>Hosting</h1>
             <h2>Why should I host?</h2>
             <h2>How do I host?</h2>

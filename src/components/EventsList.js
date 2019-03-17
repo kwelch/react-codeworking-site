@@ -1,48 +1,47 @@
 import React from 'react';
 import moment from 'moment-timezone';
-import { css } from '@emotion/core';
+import { withTheme } from 'emotion-theming';
 import EventPreview from '../components/EventPreview';
-import { mq, colors, shadow } from '../lib/styles';
+import { mq } from '../lib/styles';
 
-export const styles = {
-  list: css({
-    listStyle: 'none',
-    margin: 0,
-  }),
-  listItem: css({
-    margin: 0,
-  }),
-  eventsList: css({
-    boxShadow: shadow,
-    marginBottom: 50,
-  }),
-  eventItem: css({
-    overflow: 'hidden',
-    border: `1px solid ${colors.grays.xlight}`,
-    borderBottom: 0,
-    '&:first-child': {
-      borderTopRightRadius: 4,
-      borderTopLeftRadius: 4,
+function EventsList({ eventGroups, theme, ...props }) {
+  const styles = {
+    list: {
+      listStyle: 'none',
+      margin: 0,
     },
-    '&:last-child': {
-      borderBottomRightRadius: 4,
-      borderBottomLeftRadius: 4,
-      borderBottom: `1px solid ${colors.grays.xlight}`,
+    listItem: {
+      margin: 0,
     },
-  }),
-  dateHeader: {
-    marginBottom: '1rem',
-    marginLeft: 10,
-    fontSize: 14,
-    letterSpacing: 1,
-    textTransform: 'uppercase',
-    [mq('medium')]: {
-      marginLeft: 20,
+    eventsList: {
+      boxShadow: theme.shadows.boxShadow,
+      marginBottom: 50,
     },
-  },
-};
-
-function EventsList({ eventGroups, ...props }) {
+    eventItem: {
+      overflow: 'hidden',
+      border: `1px solid ${theme.colors.grays.xlight}`,
+      borderBottom: 0,
+      '&:first-child': {
+        borderTopRightRadius: 4,
+        borderTopLeftRadius: 4,
+      },
+      '&:last-child': {
+        borderBottomRightRadius: 4,
+        borderBottomLeftRadius: 4,
+        borderBottom: `1px solid ${theme.colors.grays.xlight}`,
+      },
+    },
+    dateHeader: {
+      marginBottom: '1rem',
+      marginLeft: 10,
+      fontSize: 14,
+      letterSpacing: 1,
+      textTransform: 'uppercase',
+      [mq('medium')]: {
+        marginLeft: 20,
+      },
+    },
+  };
   return (
     <ul {...props} css={[styles.list]}>
       {eventGroups.map(({ day, events }) => (
@@ -61,4 +60,4 @@ function EventsList({ eventGroups, ...props }) {
   );
 }
 
-export default EventsList;
+export default withTheme(EventsList);
