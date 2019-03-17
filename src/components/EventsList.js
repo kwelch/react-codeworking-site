@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment-timezone';
 import { css } from '@emotion/core';
 import EventPreview from '../components/EventPreview';
-import { colors, shadow } from '../lib/styles';
+import { mq, colors, shadow } from '../lib/styles';
 
 export const styles = {
   list: css({
@@ -32,9 +32,13 @@ export const styles = {
   }),
   dateHeader: {
     marginBottom: '1rem',
+    marginLeft: 10,
     fontSize: 14,
     letterSpacing: 1,
     textTransform: 'uppercase',
+    [mq('medium')]: {
+      marginLeft: 20,
+    },
   },
 };
 

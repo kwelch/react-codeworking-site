@@ -43,7 +43,7 @@ export const styles = {
     textDecoration: 'none',
     '&:hover,&:focus': {
       textDecoration: 'underline',
-    }
+    },
   }),
   time: css({
     display: 'block',
@@ -138,15 +138,12 @@ function EventPreview({ event, css: passedCss, ...props }) {
 
   return (
     <article css={[passedCss, styles.wrapper]} {...props}>
-      <figure css={styles.figure}>
-        {logoSrc && (
-          <ImageLoader src={logoSrc} alt="Event logo" css={styles.thumbnail} />
-        )}
-      </figure>
       <div css={styles.content}>
         <header>
           <h3 css={styles.title}>
-            <ExternalLink css={styles.titleLink} href={url}>{name.text}</ExternalLink>
+            <ExternalLink css={styles.titleLink} href={url}>
+              {name.text}
+            </ExternalLink>
           </h3>
           {timeString && <span css={styles.time}>{timeString}</span>}
           {displayAddress && (
@@ -154,14 +151,24 @@ function EventPreview({ event, css: passedCss, ...props }) {
           )}
         </header>
         <footer css={styles.footerLinks}>
-          <ExternalLink css={styles.footerLink} href={url}>RSVP</ExternalLink>
+          <ExternalLink css={styles.footerLink} href={url}>
+            RSVP
+          </ExternalLink>
           {displayAddress && (
-            <ExternalLink css={styles.footerLink} href={getDirectionsLink(displayAddress)}>
+            <ExternalLink
+              css={styles.footerLink}
+              href={getDirectionsLink(displayAddress)}
+            >
               Directions
             </ExternalLink>
           )}
         </footer>
       </div>
+      <figure css={styles.figure}>
+        {logoSrc && (
+          <ImageLoader src={logoSrc} alt="Event logo" css={styles.thumbnail} />
+        )}
+      </figure>
     </article>
   );
 }
