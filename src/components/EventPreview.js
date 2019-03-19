@@ -23,7 +23,7 @@ export default function EventPreview({ event, ...props }) {
         <ExternalLink href={url}>{name.text}</ExternalLink>
       </h3>
       <div css={footerLinks}>
-        <p>{venue.name}</p>
+        <p>{!venue.id ? 'Location to be determined...' : venue.name}</p>
         <p>{displayAddress}</p>
         <ExternalLink href={url}>RSVP</ExternalLink>
         {displayAddress && (
