@@ -100,6 +100,7 @@ export const query = graphql`
             url
           }
           venue {
+            id
             name
             address {
               localized_address_display

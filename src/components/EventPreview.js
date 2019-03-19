@@ -1,7 +1,7 @@
 import React from 'react';
 import ExternalLink from '../components/ExternalLink';
 import { thumbnail, footerLinks } from './styles';
-import ImageLoader from "./ImageLoader";
+import ImageLoader from './ImageLoader';
 
 const getDirectionsLink = (address) =>
   `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
@@ -25,10 +25,16 @@ export default function EventPreview({ event, ...props }) {
       <div css={footerLinks}>
         <p>{venue.name}</p>
         <p>{displayAddress}</p>
-        <ExternalLink href={url}>RSVP</ExternalLink> |{' '}
-        <ExternalLink href={getDirectionsLink(displayAddress)}>
-          Get Directions
-        </ExternalLink>
+        <ExternalLink href={url}>RSVP</ExternalLink>
+        {displayAddress && (
+          <>
+            {' '}
+            |{' '}
+            <ExternalLink href={getDirectionsLink(displayAddress)}>
+              Get Directions
+            </ExternalLink>
+          </>
+        )}
       </div>
     </article>
   );
