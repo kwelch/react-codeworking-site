@@ -1,34 +1,37 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import {
-  withGutters,
-  light,
-  darkAccent,
-  styleLinks,
-} from '../components/styles';
-import EventPreview from '../components/EventPreview';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import { colors, withGutters } from '../lib/styles';
+import EventsList from '../components/EventsList';
+import formatEvents from '../lib/formatEvents';
+
+// for dev purposes only
+import dummyEvents from '../lib/dummyEvents';
 
 function HomePage({
   data: {
     allEventbriteEvent: { edges: events },
   },
 }) {
+  if (process.env.NODE_ENV === 'development') {
+    events = [...events, ...dummyEvents];
+  }
+  const eventsByDate = formatEvents(events);
   return (
     <Layout>
       <div className="page-container">
         <SEO title="Home" />
         <div
           css={{
-            backgroundColor: darkAccent,
+            backgroundColor: colors.darkAccent,
           }}
         >
           <div
             css={[
               withGutters,
               {
-                color: light,
+                color: colors.light,
                 padding: '1.28rem 0',
                 marginBottom: '1.2rem',
                 marginTop: '-1.5rem',
@@ -41,24 +44,18 @@ function HomePage({
             </h2>
           </div>
         </div>
-        <div css={[withGutters, styleLinks({ color: darkAccent })]}>
+        <div css={[withGutters]}>
           <h1 css={{ margin: '0.75em 0' }}>Upcoming Events</h1>
-          {events.map(({ node: event }) => (
-            <EventPreview
-              key={event.id}
-              event={event}
-              css={{ marginBottom: '1rem' }}
-            />
-          ))}
+          <EventsList eventGroups={eventsByDate} />
         </div>
         {/*
         <div css={[withGutters]}>
-          <div css={{ background: light }}>
+          <div css={{ background: colors.light }}>
             <h1>Why you should attend?</h1>
           </div>
         </div>
         <div css={[withGutters]}>
-          <div css={{ background: light }}>
+          <div css={{ background: colors.light }}>
             <h1>Hosting</h1>
             <h2>Why should I host?</h2>
             <h2>How do I host?</h2>
@@ -98,6 +95,16 @@ export const query = graphql`
           url
           logo {
             url
+          }
+          start {
+            timezone
+            local
+            utc
+          }
+          end {
+            timezone
+            local
+            utc
           }
           venue {
             id

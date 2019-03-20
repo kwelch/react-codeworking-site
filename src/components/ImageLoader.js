@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react'
-import Loader from "./Loader";
+import React, { PureComponent } from 'react';
+import Loader from './Loader';
 
 export default class ImageLoader extends PureComponent {
   state = {
-    loaded: false
+    loaded: false,
   };
 
   componentDidMount() {
@@ -25,10 +25,12 @@ export default class ImageLoader extends PureComponent {
     this.loader.onload = () => {};
   }
   render() {
+    const { src, alt, ...props } = this.props;
+    // return <Loader {...props} />;
     return this.state.loaded ? (
-      <img className={this.props.className} alt="" src={this.props.src} />
+      <img alt={alt} src={this.props.src} {...props} />
     ) : (
-      <Loader />
+      <Loader {...props} />
     );
   }
 }

@@ -1,10 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { thumbnail } from "./styles";
 
-export default function Loader() {
+export default function Loader({ css: passedCss, ...props }) {
   return (
-    <div css={[thumbnail, loaderContainer]}>
+    <div css={[loaderContainer, passedCss]} {...props}>
       <img
         css={loader}
         alt="loader"
@@ -16,9 +15,12 @@ export default function Loader() {
 
 export const loader = css({
   filter: 'blur(25px)',
-  width: '71%'
+  width: '100%',
+  height: '100%',
 });
 
 export const loaderContainer = css({
-  overflow: 'hidden'
+  overflow: 'hidden',
+  width: '100%',
+  height: '100%',
 });
