@@ -49,6 +49,8 @@ const getDirectionsLink = (address) =>
  * @returns
  */
 function EventLocation({ venue, theme }) {
+  const name = get(venue, 'name');
+  const displayAddress = get(venue, 'displayAddress');
   return (
     <address
       css={{
@@ -64,8 +66,15 @@ function EventLocation({ venue, theme }) {
         },
       }}
     >
-      <p>{venue.name}</p>
-      {/* <p>{venue.displayAddress}</p> */}
+      <p>
+        {name || 'Location to be determined'}
+        {displayAddress && (
+          <>
+            <br />
+            {displayAddress}
+          </>
+        )}
+      </p>
     </address>
   );
 }

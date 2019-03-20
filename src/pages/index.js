@@ -105,6 +105,7 @@ export const query = graphql`
             utc
           }
           venue {
+            id
             name
             address {
               localized_address_display

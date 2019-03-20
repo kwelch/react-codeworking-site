@@ -29,7 +29,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-eventbrite',
+      resolve: 'gatsby-plugin-source-eventbrite',
       options: {
         query: {
           'organizer.id': '15672387101',

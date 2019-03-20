@@ -4849,6 +4849,15 @@ gatsby-link@^2.0.7:
     "@types/reach__router" "^1.0.0"
     prop-types "^15.6.1"
 
+gatsby-node-helpers@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-node-helpers/-/gatsby-node-helpers-0.3.0.tgz#3bdca3b7902a702a5834fef280ad66d51099d57c"
+  integrity sha1-O9yjt5AqcCpYNP7ygK1m1RCZ1Xw=
+  dependencies:
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.4"
+    p-is-promise "^1.1.0"
+
 gatsby-plugin-emotion@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.0.3.tgz#7b4ee2c96914cf49ff2d170b8f8e52036e8932f0"
@@ -4894,6 +4903,15 @@ gatsby-plugin-react-helmet@^3.0.2:
   integrity sha512-Xn8d4EckfUkO3xB8qfjn1AcqeA2fYgd6Mbin3RHc/Zu6YRiOQqdJAVBXz+7PbFpTt+6GCluKklEpFUA4RS4oYw==
   dependencies:
     "@babel/runtime" "^7.0.0"
+
+gatsby-plugin-source-eventbrite@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-source-eventbrite/-/gatsby-plugin-source-eventbrite-1.0.2.tgz#cc15f4cb53a3720c07548e83f703e5e19b7c53d1"
+  integrity sha512-bxYYHKHbQSLn3FxhEIe5jRHaEzkPAu5zzfEyrKw06uun/9J5inBI3Lj5Fulesy8UYcKKLNze84F0eMbMEQs9LQ==
+  dependencies:
+    eventbrite "^1.2.1"
+    gatsby-node-helpers "^0.3.0"
+    query-string "^6.3.0"
 
 gatsby-plugin-web-font-loader@^1.0.4:
   version "1.0.4"
