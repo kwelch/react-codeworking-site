@@ -98,10 +98,12 @@ export const query = graphql`
           }
           start {
             timezone
+            local
             utc
           }
           end {
             timezone
+            local
             utc
           }
           venue {

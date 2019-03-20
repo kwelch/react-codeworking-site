@@ -1,5 +1,5 @@
 import { groupBy, get } from 'lodash';
-import moment from 'moment-timezone';
+import tinytime from 'tinytime';
 
 /**
  * Sort CB to order events by start time.
@@ -7,16 +7,17 @@ import moment from 'moment-timezone';
  * @param {Object} eventB - Second event for the compare function.
  */
 export function sortByStartTime(eventA, eventB) {
-  const aStart = get(eventA, 'node.start.utc');
-  const bStart = get(eventB, 'node.start.utc');
+  const timeTemplate = tinytime(`{H}{mm}`, { padHours: true });
+  const aStart = get(eventA, 'node.start.local');
+  const bStart = get(eventB, 'node.start.local');
+  const aTime = parseInt(timeTemplate.render(new Date(aStart)), 10);
+  const bTime = parseInt(timeTemplate.render(new Date(bStart)), 10);
   if (aStart && !bStart) {
     return -1;
   }
   if (!aStart && bStart) {
     return 1;
   }
-  const aTime = parseInt(moment(aStart).format('HHmm'), 10);
-  const bTime = parseInt(moment(bStart).format('HHmm'), 10);
   return aTime < bTime ? -1 : aTime > bTime ? 1 : 0;
 }
 
@@ -26,8 +27,9 @@ export function sortByStartTime(eventA, eventB) {
  * @param {Object} eventB - Second event for the compare function.
  */
 export function sortByDay(eventGroupA, eventGroupB) {
-  const dayA = moment(eventGroupA.day).format('YYYYMMDD');
-  const dayB = moment(eventGroupB.day).format('YYYYMMDD');
+  const timeTemplate = tinytime(`{YYYY}{Mo}{DD}`, { padMonth: true, padDays: true });
+  const dayA = timeTemplate.render(new Date(eventGroupA.day));
+  const dayB = timeTemplate.render(new Date(eventGroupB.day));
   return dayA < dayB ? -1 : dayA > dayB ? 1 : 0;
 }
 
@@ -38,12 +40,9 @@ export function sortByDay(eventGroupA, eventGroupB) {
  */
 export function groupEventsByDate(events) {
   return groupBy(events, (event) => {
-    const time = get(event, 'node.start.utc');
-    const timezone = get(event, 'node.start.timezone');
-    return moment(time)
-      .tz(timezone.replace(' ', '_'))
-      .startOf('day')
-      .format();
+    const timeTemplate = tinytime(`{YYYY}-{Mo}-{DD}T00:00:00`, { padDays: true, padMonth: true });
+    const time = get(event, 'node.start.local') || get(event, 'node.end.local');
+    return timeTemplate.render(new Date(time));
   });
 }
 

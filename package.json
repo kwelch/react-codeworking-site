@@ -23,14 +23,13 @@
     "gatsby-source-filesystem": "^2.0.20",
     "gatsby-transformer-remark": "^2.2.5",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0",
-    "moment-timezone": "^0.5.23",
     "polished": "^3.0.3",
     "prop-types": "^15.6.2",
     "query-string": "^6.3.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "tinytime": "^0.2.6"
   },
   "keywords": [
     "gatsby"

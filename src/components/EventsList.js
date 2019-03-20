@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment-timezone';
+import tinytime from 'tinytime';
 import { withTheme } from 'emotion-theming';
 import EventPreview from '../components/EventPreview';
 import { mq } from '../lib/styles';
@@ -44,18 +44,22 @@ function EventsList({ eventGroups, theme, ...props }) {
   };
   return (
     <ul {...props} css={[styles.list]}>
-      {eventGroups.map(({ day, events }) => (
-        <li key={day} css={[styles.listItem]}>
-          <h3 css={styles.dateHeader}>{moment(day).format('LL')}</h3>
-          <ul css={[styles.list, styles.eventsList]}>
-            {events.map(({ node: event }) => (
-              <li key={event.id} css={[styles.listItem, styles.eventItem]}>
-                <EventPreview event={event} />
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
+      {eventGroups.map(({ day, events }) => {
+        return (
+          <li key={day} css={[styles.listItem]}>
+            <h3 css={styles.dateHeader}>
+              {tinytime(`{MMMM} {DD}, {YYYY}`).render(new Date(day))}
+            </h3>
+            <ul css={[styles.list, styles.eventsList]}>
+              {events.map(({ node: event }) => (
+                <li key={event.id} css={[styles.listItem, styles.eventItem]}>
+                  <EventPreview event={event} />
+                </li>
+              ))}
+            </ul>
+          </li>
+        );
+      })}
     </ul>
   );
 }

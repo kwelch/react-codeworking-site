@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment-timezone';
+import tinytime from 'tinytime';
 import { get } from 'lodash';
 import { withTheme } from 'emotion-theming';
 import ExternalLink from './ExternalLink';
@@ -21,12 +21,11 @@ import { mq, defaultTransition } from '../lib/styles';
  * @returns {string} Formatted time string (ex: 10:00 AM to 4:00 PM)
  */
 function getTimeString(start, end) {
-  const formatTime = (time) =>
-    time.utc
-      ? moment(time.utc)
-          .tz((time.timezone || 'America/Chicago').replace(' ', '_'))
-          .format('h:mm A')
+  const formatTime = (time) => {
+    return time.local
+      ? tinytime(`{h}:{mm} {a}`).render(new Date(time.local))
       : '';
+  }
   const startTime = formatTime(start);
   const endTime = formatTime(end);
   return endTime ? `${startTime} to ${endTime}` : startTime;
