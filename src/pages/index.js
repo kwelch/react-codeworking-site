@@ -39,7 +39,7 @@ function HomePage({
             ]}
           >
             <h2>
-              Come together to engineering better solutions and leveling up the
+              Come together to engineer better solutions and level up the
               community.
             </h2>
           </div>
