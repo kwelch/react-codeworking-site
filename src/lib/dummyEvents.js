@@ -4,7 +4,7 @@ export default [
       id: 34530,
       url: 'https://google.com',
       name: {
-        text: 'Another Great Meetup Event',
+        text: '[MOCK] Another Great Meetup Event',
       },
       logo: {
         url: `https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F39828628%2F182250358318%2F1%2Foriginal.jpg?h=200&w=450&auto=compress&rect=0%2C15%2C1200%2C600&s=03d34f6be25bab6a8d0e7153fda3128a`,
@@ -32,7 +32,7 @@ export default [
       id: 34535,
       url: 'https://google.com',
       name: {
-        text: 'Awesome Meetup Event',
+        text: '[MOCK] Awesome Meetup Event',
       },
       logo: {
         url: `https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F39828628%2F182250358318%2F1%2Foriginal.jpg?h=200&w=450&auto=compress&rect=0%2C15%2C1200%2C600&s=03d34f6be25bab6a8d0e7153fda3128a`,
@@ -60,7 +60,7 @@ export default [
       id: 34536,
       url: 'https://google.com',
       name: {
-        text: 'Cool Facebook Event',
+        text: '[MOCK] Cool Facebook Event',
       },
       logo: {
         url: `https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F39828628%2F182250358318%2F1%2Foriginal.jpg?h=200&w=450&auto=compress&rect=0%2C15%2C1200%2C600&s=03d34f6be25bab6a8d0e7153fda3128a`,
