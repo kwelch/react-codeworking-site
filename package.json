@@ -22,7 +22,7 @@
     "gatsby-plugin-source-eventbrite": "^2.0.0-next.0",
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^2.0.20",
-    "gatsby-transformer-remark": "^2.2.5",
+    "gatsby-transformer-remark": "^5.25.1",
     "lodash": "^4.17.13",
     "polished": "^3.0.3",
     "prop-types": "^15.6.2",
